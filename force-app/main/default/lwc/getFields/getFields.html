@@ -1,0 +1,114 @@
+<template>
+<lightning-card title="Account Information">
+    <div class="slds-p-around_large">
+        <div class="slds-grid slds-grid_align-end">
+            <h2 class="slds-text-title slds-m-right_large">Add Row</h2>
+            <lightning-button-icon 
+                icon-name="utility:add" 
+                size="large" 
+                onclick={addRow} 
+                variant="bare" 
+                alternative-text="Add">
+            </lightning-button-icon>
+        </div>
+
+        <div class="slds-m-top_large">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <th scope="col">Account Name <span style="color: red;">*</span></th>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={rows} for:item="row" for:index="index">
+                        <tr key={row.key}>
+                            <td data-label="Account Name">
+                                <lightning-input 
+                                    type="text"  
+                                    value={row.accountName} 
+                                    onchange={handleInputChange} 
+                                    data-key={row.key} 
+                                    data-field="accountName"
+                                    disabled={checkRead}>
+                                </lightning-input>
+                            </td>
+                            <td data-label="Account Number">
+                                <!-- pattern="^[0-9]{10}$" 
+                                message-when-pattern-mismatch="Please enter a 10-digit account number"  -->
+                                <lightning-input 
+                                    type="text" 
+                                    value={row.accountNumber} 
+                                    onchange={handleInputChange} 
+                                    data-key={row.key} 
+                                    data-field="accountNumber"
+                                    disabled={checkRead}
+                                    >
+                                    
+                                </lightning-input>
+                            </td>
+                            <td data-label="Phone">
+                                <!-- pattern="/(\+91)?(-)?\s*?(91)?\s*?(\d{3})-?\s*?(\d{3})-?\s*?(\d{4})"  -->
+                                <lightning-input 
+                                    type="tel" 
+                                    
+                                    value={row.phone} 
+                                    onchange={handleInputChange} 
+                                    data-key={row.key} 
+                                    data-field="phone"
+                                    disabled={checkRead}>
+                                    
+                                </lightning-input>
+                            </td>
+                            <td data-label="Type">
+                                <lightning-combobox 
+                                    type="picklist"  
+                                    value={row.type} 
+                                    options={typeOptions} 
+                                    onchange={handleTypeChange} 
+                                    data-key={row.key}
+                                    disabled={checkRead}>
+                                </lightning-combobox>
+                            </td>
+                            <td data-label="Action">
+                                <lightning-button-icon 
+                                    icon-name="action:delete"  
+                                    onclick={deleteRow} 
+                                    data-key={row.key}>
+                                </lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slds-p-top_large slds-text-align_center">
+            <lightning-button 
+                class="slds-m-horizontal_medium" 
+                name="Save" 
+                label="Save" 
+                variant ="brand" 
+                onclick={saveRecord}>
+            </lightning-button>
+            <lightning-button 
+                class="slds-m-horizontal_medium" 
+                name="Cancel" 
+                variant="destructive" 
+                label="Cancel" 
+                onclick={cancelRecord}>
+            </lightning-button>
+        </div>
+
+    <div class="slds-p-top_large slds-text-align_center">
+
+        <c-child-Comp  tablefields={TableFields} tablecolumns={TableColumns}>
+
+        </c-child-Comp>
+    </div>
+</div>
+</lightning-card>
+</template>

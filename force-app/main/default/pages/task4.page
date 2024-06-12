@@ -1,0 +1,5 @@
+<apex:page standardController="Account">
+    <flow:interview name="Add_Opportunity" >
+        <apex:param name="recordId" value="{!Account.Id}" />
+    </flow:interview>
+</apex:page>

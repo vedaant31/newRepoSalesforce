@@ -1,0 +1,8 @@
+<template>
+    <template if:false={checkcancel}>
+        <lightning-datatable key-field="id" data={tablefields} columns={tablecolumns}></lightning-datatable>
+    </template>
+    <template if:true={checkcancel}>
+        <lightning-datatable key-field="id" columns={tablecolumns}></lightning-datatable>
+    </template>
+</template>

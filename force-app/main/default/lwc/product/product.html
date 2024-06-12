@@ -1,0 +1,215 @@
+<template>
+    <!-- <template if:false={alreadyRec}>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Product Name" style="font-size: 15px;">Product Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Price" style="font-size: 15px;">Price</div>
+                    </th>
+
+                    <template for:each={months} for:item="month">
+                        <th key={montha} scope="col">
+                            <div class="slds-truncate" title={month} style="font-size: 15px;">{month}</div>
+                        </th>
+                    </template>
+                    <th scope="col" style="width: 20px;">
+                        <div class="slds-truncate" title="Action" style="font-size: 15px;">Action</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Sum" style="font-size: 15px;">Sum</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template if:true={products}>
+                    <template for:each={products} for:item="product">
+                        <tr key={product.Id} class="slds-hint-parent">
+                            <td>
+                                <div class="slds-truncate" title={product.Name}>{product.Name}</div>
+                            </td>
+                            <td>
+                                <lightning-input class="slds-truncate" type="number" read-only value={product.unitPrice}
+                                    title={product.unitPrice}></lightning-input>
+                            </td> -->
+
+                            <!-- <template for:each={limitedMonths} for:item="month">
+                                <td key={month} style="width: 70px;">
+                                    <lightning-input class="tempp" name="qty" type="number"
+                                        onchange={handleQuantityChange} read-only value="0"
+                                        data-price={product.unitPrice} data-product-id={product.productId}
+                                        data-month={month}></lightning-input>
+                                </td>
+                            </template> -->
+                            <!-- <template for:each={months} for:item="month">
+                                <td key={month} style="width: 70px;">
+                                    <lightning-input class="tempp monthes chak" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number"  data-product-id={product.productId}
+                                        data-month={month}></lightning-input>
+                                </td>
+                            </template>
+
+                            <td>
+                                <lightning-button class="slds-m-horizontal_medium" name="Save" label="Save"
+                                    variant="brand" onclick={saveRecord} data-price={product.unitPrice}
+                                    data-product-id={product.productId}></lightning-button>
+                            </td>
+                            <td>
+                                <lightning-input class="ved" type="number" name="total"
+                                    data-product-id={product.productId} read-only></lightning-input>
+                            </td>
+                        </tr>
+                    </template>
+
+                    <tr>
+                        <td colspan="100%" style="text-align: right; padding: 10px;">
+                            <div style="display: inline-flex; align-items: center; gap: 10px;">
+                                <lightning-button class="slds-m-horizontal_medium" name="Save" label="Total Sum"
+                                    variant="neutral" onclick={calculateNetTotal}></lightning-button>
+                                <lightning-input class="totalSum" type="number" value={totalSum} read-only
+                                    style="width: 100px;"></lightning-input>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template> -->
+
+    <template if:false={alreadyRec}>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Product Name" style="font-size: 15px;">Product Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Price" style="font-size: 15px;">Price</div>
+                    </th>
+
+                    <template for:each={months} for:item="month">
+                        <th key={month} scope="col">
+                            <div class="slds-truncate" title={month} style="font-size: 15px;">{month}</div>
+                        </th>
+                    </template>
+                    <th scope="col" style="width: 20px;">
+                        <div class="slds-truncate" title="Action" style="font-size: 15px;">Action</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Sum" style="font-size: 15px;">Sum</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template if:true={products}>
+                    
+                    <template for:each={products} for:item="product">
+                        <tr key={product.Id} class="slds-hint-parent">
+                            <td>
+                                <div class="slds-truncate"  title={product.name}>{product.name}</div>
+                            </td>
+                            <td>
+                                <lightning-input class="slds-truncate" type="number" read-only value={product.unitPrice}
+                                    title={product.unitPrice}></lightning-input>
+                            </td>
+
+                            <!-- <template for:each={limitedMonths} for:item="month">
+                                <td key={month} style="width: 70px;">
+                                    <lightning-input class="tempp" name="qty" type="number"
+                                        onchange={handleQuantityChange} read-only value="0"
+                                        data-price={product.unitPrice} data-product-id={product.productId}
+                                        data-month={month}></lightning-input>
+                                </td>
+                            </template> -->
+                                
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes  Jan" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} value={product.janQty} type="number"   data-product-id={product.productId}
+                                        data-month="Jan"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Feb" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} value={product.febQty} type="number"   data-product-id={product.productId}
+                                        data-month="Feb"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Mar" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} value={product.marQty} type="number"   data-product-id={product.productId}
+                                        data-month="Mar"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Apr" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.aprQty}   data-product-id={product.productId}
+                                        data-month="Apr"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes May" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.mayQty}  data-product-id={product.productId}
+                                        data-month="May"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Jun" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.junQty}  data-product-id={product.productId}
+                                        data-month="Jun"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Jul" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.julQty}  data-product-id={product.productId}
+                                        data-month="Jul"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Aug" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number"  value={product.augQty} data-product-id={product.productId}
+                                        data-month="Aug"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Sep" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.sepQty}  data-product-id={product.productId}
+                                        data-month="Sep"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Oct" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.octQty}  data-product-id={product.productId}
+                                        data-month="Oct"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Nov" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.novQty}  data-product-id={product.productId}
+                                        data-month="Nov"></lightning-input>
+                                </td>
+                                <td  style="width: 70px;">
+                                    <lightning-input class="tempp monthes Dec" name="qty" onchange={handleQuantityChange}
+                                        data-price={product.unitPrice} type="number" value={product.decQty}  data-product-id={product.productId}
+                                        data-month="Dec"></lightning-input>
+                                </td>
+
+                            <td>
+                                <lightning-button class="slds-m-horizontal_medium" name="Save" label="Save"
+                                    variant="brand" onclick={saveRecord} data-price={product.unitPrice}
+                                    data-product-id={product.productId}></lightning-button>
+                            </td>
+                            <td>
+                                <lightning-input class="ved" type="number" name="total" onload={Hey}
+                                    data-product-id={product.productId} value={product.totalYearPrice} read-only></lightning-input>
+                            </td>
+                        </tr>
+                </template>
+
+                    <tr>
+                        <td colspan="100%" style="text-align: right; padding: 10px;">
+                            <div style="display: inline-flex; align-items: center; gap: 10px;">
+                                <lightning-button class="slds-m-horizontal_medium" name="Save" label="Total Sum"
+                                    variant="neutral" onclick={calculateNetTotal}></lightning-button>
+                                <lightning-input class="totalSum" type="number" value={totalSum} read-only
+                                    style="width: 100px;"></lightning-input>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+    </template>
+</template>

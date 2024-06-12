@@ -1,0 +1,142 @@
+<apex:page controller="InvoiceController" showHeader="false" standardStylesheets="false">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .invoice-container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            max-width: 800px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .address {
+            margin-bottom: 20px;
+            max-width: 300px;
+            float: left;
+        }
+
+        .address p {
+            margin: 5px 0;
+        }
+
+        .address b {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .products-table th,
+        .products-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .products-table th {
+            background-color: #f2f2f2;
+        }
+
+        .total-row {
+            text-align: right;
+            font-weight: bold;
+        
+        }
+        .footer{
+        font-weight:bold;
+        }
+    </style>
+
+    <div class="invoice-container">
+        <div class="header">
+            <h1>Invoice</h1>
+        </div>
+        <div style="clear: both;"></div>
+
+        <div class="address">
+            <b>Bill To:</b>
+            <p>{!billerName}</p>
+            <p>{!billerStreet}</p>
+            <p>{!billerCity} {!billerPostal}</p>
+            <p>{!billerCountry}</p>
+        </div>
+
+        <div class="address" style="float: right;">
+            <b>Ship To:</b>
+            <p>{!receiverName}</p>
+            <p>{!receiverStreet}</p>
+            <p>{!receiverCity} {!receiverPostal}</p>
+            <p>{!receiverCountry}</p>
+        </div>
+        <div style="clear: both;"></div>
+
+        <table class="products-table">
+            <tr>
+                <th>Quantity</th>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Amount</th>
+            </tr>
+            <apex:repeat value="{!qtLineItems}" var="lineItem">
+                <tr>
+                    <td>{!lineItem.Quantity}</td>
+                    <td>{!lineItem.Product2.Name}</td>
+                    <td>${!lineItem.UnitPrice}</td>
+                    <td>${!lineItem.TotalPrice}</td>
+                </tr>
+            </apex:repeat>
+            <tr class="total-row" >
+                <td colspan="3" style="text-align:right">Subtotal</td>
+                <td>${!TotalAmount}</td>
+            </tr>
+             <tr class="total-row" >
+                <td colspan="3" style="text-align:right">Discount {!NetDiscount} % </td>
+                <td>- ${!DiscAmount} </td>
+            </tr>
+             <tr class="total-row" >
+                <td colspan="3" style="text-align:right"> Discounted Subtotal</td>
+                <td>${!AfterDiscAmount}</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="3" style="text-align:right">GST {!TaxValue} %:</td>
+                <td>+ ${!NetAmount}  </td>
+            </tr>
+            <tr class="total-row" >
+                <td colspan="3" style="text-align:right; font-size:25px">Total</td>
+                <td style="font-size:25px">${!FinalAmount}</td>
+            </tr>
+            
+        </table>
+        <div class="footer">
+            <p>
+                Terms and conditions
+            </p>
+            <p>
+                Payment due in 15 days
+            </p>
+            
+        </div>
+    </div>
+</apex:page>
