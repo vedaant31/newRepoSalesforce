@@ -1,0 +1,26 @@
+<template>
+    <template if:true={showtable}>
+        <lightning-card title="Selected Records">
+            <div class="slds-p-around_medium">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr>
+                            <template for:each={tree1} for:item="column" >
+                                <th key={index}>{column}</th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={tree2} for:item="record" >
+                            <tr key={recordIndex}>
+                                <template for:each={record} for:item="field" >
+                                    <td key={fieldIndex}>{field}</td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </lightning-card>
+    </template>
+</template>

@@ -1,0 +1,61 @@
+<aura:component controller="fetchData" implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable" access="global">
+    <aura:attribute name="allObject" type="List" access="PRIVATE"/>
+    <aura:attribute name="allField" type="List" access="PRIVATE"/>
+    <aura:attribute name="selectedObject" type="String" access="PRIVATE"/>
+    <aura:attribute name="selectedField" type="List" access="PRIVATE"/>
+    <aura:attribute name="storedFields" type="List" access="PRIVATE"/>
+    <aura:attribute name="showButton" type="Boolean" default="false" access="PRIVATE"/>
+    <lightning:messageChannel type="SampleMessageChannel__c"/>
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium">All Object and Respective Fields</h4>
+    </div>
+
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative">
+        <form class="slds-form--stacked">
+            Select any Object and get All the Fields...
+        </form>
+    </div>
+
+    <div class="slds-grid slds-gutters slds-p-around_medium">
+        <div class="slds-col slds-size_1-of-2">
+            <span>
+                <lightning:select name="objects" label="Select an Object" aura:id="objectId" value="{!v.selectedObject}" onchange="{!c.handleChange}">
+                    <option value="">choose one...</option>
+                    <aura:iteration items="{!v.allObject}" var="object">
+                        <option text="{!object.value}" value="{!object.key}"/>
+                    </aura:iteration>
+                </lightning:select>
+            </span>
+        </div>
+
+        <aura:if isTrue="{!v.selectedObject}">
+            <div class="slds-col slds-size_1-of-2">
+                <span>
+                    <lightning:dualListbox 
+                        name="allField" 
+                        label="Here are the Fields" 
+                        aura:id="fieldId" 
+                        sourceLabel="Available Fields" 
+                        selectedLabel="Selected Fields" 
+                        fieldLevelHelp="Select one or more fields" 
+                        options="{!v.allField}"
+                        value="{!v.selectedField}" 
+                        required="true"
+                        onchange="{!c.wa}"/>
+                </span>
+                <aura:if isTrue="{!v.showButton}">            
+                    <div align="center" style="margin-top: 10px;">
+                        <lightning:button label="Fetch Records" onclick="{!c.saveSelectedFields}" variant="brand" />
+                        <lightning:messageChannel type="SampleMessageChannel__c"
+                        aura:id="sampleMessageChannel"/>
+
+                    </div>
+                </aura:if>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>
